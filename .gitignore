@@ -5,4 +5,6 @@ __pycache__/
 *.log
 logs/
 log/
-d1_scraper.log
+d1_scraper.logrm README.txt
+rm -rf d1-web-scraping
+rm -rf d1_web_scraping
