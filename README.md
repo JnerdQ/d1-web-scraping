@@ -16,7 +16,7 @@ WebDriver Manager: Gestión de controladores para Selenium
 
 
 1. Clonar el repositorio
-
+```bash
 git clone https://github.com/JnerdQ/d1-web-scraping.git
 cd d1-web-scraping
 
@@ -27,6 +27,7 @@ python -m venv venv
 3. Activar el entorno virtual
 
 En Windows:
+
 venv\Scripts\activate
 
 En macOS/Linux
