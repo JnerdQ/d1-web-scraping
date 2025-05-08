@@ -1,0 +1,78 @@
+# D1 Scraper
+
+## Requisitos Previos
+- Python 3.6 o superior instalado
+- Google Chrome instalado
+- Conexión a Internet
+
+## Pasos de Instalación
+
+1. **Crear un directorio para el proyecto (opcional)**
+   ```bash
+   mkdir d1_scraper_project
+   cd d1_scraper_project
+   ```
+
+2. **Crear un entorno virtual (recomendado)**
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activar el entorno virtual**
+   - En Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - En macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Guardar el archivo d1_scraper.py**
+   - Asegúrate de que el código del scraper esté guardado en un archivo llamado `d1_scraper.py`
+
+5. **Guardar el archivo requirements.txt**
+   - Crea un archivo llamado `requirements.txt` con el contenido:
+     ```
+     selenium==4.32.0
+     webdriver-manager==4.0.2
+     ```
+
+6. **Instalar las dependencias**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Ejecución del Scraper
+
+1. **Ejecutar directamente el script d1_scraper.py**
+   ```bash
+   python d1_scraper.py
+   ```
+
+   El script se ejecutará con los términos de búsqueda predeterminados:
+   - leche
+   - arroz
+   - aceite
+   - azúcar
+   - café
+
+2. **Ejecutar con un producto específico**
+   ```bash
+   python d1_scraper.py nombre_producto
+   ```
+
+   Ejemplo:
+   ```bash
+   python d1_scraper.py cafe
+   ```
+
+3. **Verificar los resultados**
+   - El script generará un archivo `d1_products.csv` en el directorio actual
+   - También generará un archivo log `d1_scraper.log` con información de la ejecución
+
+## Notas Importantes
+
+- Es posible que necesites permisos de administrador para instalar algunas dependencias
+- Si la página web de Tiendas D1 cambia su estructura, es posible que el scraper necesite actualizaciones
+- Los resultados se guardarán en formato CSV para su análisis posterior

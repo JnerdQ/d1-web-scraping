@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Detalle del Producto</h1>
+    <div>
+        <a href="{% url 'product_update' product.pk %}" class="btn btn-warning">
+            <i class="bi bi-pencil"></i> Editar
+        </a>
+        <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger ms-2">
+            <i class="bi bi-trash"></i> Eliminar
+        </a>
+        <a href="{% url 'product_list' %}" class="btn btn-outline-primary ms-2">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="row g-0">
+        <div class="col-md-4">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+            {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                <span class="text-muted">Sin imagen</span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title">{{ product.name }}</h2>
+                <div class="mb-3">
+                    <p class="product-price mb-1">${{ product.price|floatformat:0 }}</p>
+                    {% if product.quantity %}
+                    <span class="quantity-badge">{{ product.quantity }}</span>
+                    {% endif %}
+                </div>
+
+                <h5>Información del producto</h5>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 120px;">Categoría:</th>
+                            <td>{{ product.category|default:"No especificada" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fuente:</th>
+                            <td>{{ product.source }}</td>
+                        </tr>
+                        <tr>
+                            <th>Creado:</th>
+                            <td>{{ product.created_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actualizado:</th>
+                            <td>{{ product.updated_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                {% if product.description %}
+                <h5>Descripción</h5>
+                <p>{{ product.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

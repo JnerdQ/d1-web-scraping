@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+    <div class="card-body text-center">
+        <h2 class="card-title mb-4">Confirmar eliminación</h2>
+
+        <div class="alert alert-danger">
+            <p class="mb-0">¿Estás seguro de que deseas eliminar el producto <strong>"{{ product.name }}"</strong>?</p>
+        </div>
+
+        {% if product.image_url %}
+        <div class="mb-3">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" style="max-height: 150px;">
+        </div>
+        {% endif %}
+
+        <p>Precio: ${{ product.price|floatformat:0 }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center gap-2 mt-4">
+                <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

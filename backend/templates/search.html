@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Resultados para "{{ query }}"</h1>
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Volver al inicio</a>
+</div>
+
+<div class="mb-4">
+    <form action="{% url 'search' %}" method="GET" class="d-flex">
+        <input type="text" class="form-control me-2" name="q" value="{{ query }}" placeholder="Buscar productos...">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+{% if products %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    {% for product in products %}
+    <div class="col">
+        <div class="card product-card h-100">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" class="card-img-top product-image p-3" alt="{{ product.name }}">
+            {% else %}
+            <div class="card-img-top product-image d-flex align-items-center justify-content-center bg-light p-3">
+                <span class="text-muted">Sin imagen</span>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="product-price">${{ product.price|floatformat:0 }}</p>
+                {% if product.quantity %}
+                <span class="quantity-badge mb-2 d-inline-block">{{ product.quantity }}</span>
+                {% endif %}
+                {% if product.description %}
+                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-white">
+                <small class="text-muted">Agregado: {{ product.created_at|date:"d/m/Y" }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    <h4 class="alert-heading">No se encontraron resultados</h4>
+    <p>No se encontraron productos que coincidan con "{{ query }}". Intenta con otra búsqueda.</p>
+</div>
+{% endif %}
+{% endblock %}

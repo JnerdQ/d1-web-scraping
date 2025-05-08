@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded mb-4">
+            <h1 class="display-4">Web Scraper de Productos D1</h1>
+            <p class="lead">Este proyecto extrae información de productos desde la tienda online de D1 y los almacena en
+                una base de datos.</p>
+            <hr class="my-4">
+            <p>Usa el buscador para encontrar productos específicos o explorar los productos ya encontrados.</p>
+            <form class="mt-4" action="{% url 'search' %}" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="q"
+                        placeholder="Buscar productos (ej: leche, arroz, café)">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-4">Productos recientes</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    {% for product in products %}
+    <div class="col">
+        <div class="card product-card h-100">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" class="card-img-top product-image p-3" alt="{{ product.name }}">
+            {% else %}
+            <div class="card-img-top product-image d-flex align-items-center justify-content-center bg-light p-3">
+                <span class="text-muted">Sin imagen</span>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="product-price">${{ product.price|floatformat:0 }}</p>
+                {% if product.quantity %}
+                <span class="quantity-badge mb-2 d-inline-block">{{ product.quantity }}</span>
+                {% endif %}
+                {% if product.description %}
+                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-white">
+                <small class="text-muted">Agregado: {{ product.created_at|date:"d/m/Y" }}</small>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            No hay productos disponibles. Utiliza el buscador para encontrar productos.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
