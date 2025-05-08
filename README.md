@@ -19,29 +19,31 @@ WebDriver Manager: Gestión de controladores para Selenium
 ```bash
 git clone https://github.com/JnerdQ/d1-web-scraping.git
 cd d1-web-scraping
-
+```
 2. Crear un entorno virtual
-
+```bash
 python -m venv venv
-
+```
 3. Activar el entorno virtual
 
 En Windows:
-
+```bash
 venv\Scripts\activate
-
+```
 En macOS/Linux
+```bash
 source venv/bin/activate
-
+```
 4. Instalar las dependencias
-
+```bash
 cd backend
 pip install -r requirements.txt
-
+```
 5. Configurar la base de datos
-
+```bash
 python manage.py migrate
-
+```
 6. Iniciar el servidor de desarrollo
-
+```bash
 python manage.py runserver
+```
